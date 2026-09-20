@@ -1,0 +1,383 @@
+{
+  "entities": {
+    "users": {
+      "title": "User Profiles",
+      "description": "User profile data and simulated demo account balances",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "fullName": { "type": "string" },
+        "username": { "type": "string" },
+        "country": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "preferredCurrency": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "demoBalance": { "type": "number" },
+        "demoEquity": { "type": "number" },
+        "verified": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "fullName", "demoBalance"]
+    },
+    "markets": {
+      "title": "Demo Markets",
+      "description": "Demo financial market catalog",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "symbol": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "price": { "type": "number" },
+        "change24h": { "type": "number" },
+        "high24h": { "type": "number" },
+        "low24h": { "type": "number" },
+        "active": { "type": "boolean" },
+        "assetClass": { "type": "string" }
+      },
+      "required": ["id", "symbol", "name", "category", "price"]
+    },
+    "watchlists": {
+      "title": "Watchlists",
+      "description": "User market watchlists",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "marketId": { "type": "string" },
+        "addedAt": { "type": "string" }
+      },
+      "required": ["userId", "marketId"]
+    },
+    "orders": {
+      "title": "Demo Orders",
+      "description": "Simulated user orders",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "symbol": { "type": "string" },
+        "assetName": { "type": "string" },
+        "direction": { "type": "string", "enum": ["buy", "sell"] },
+        "orderType": { "type": "string", "enum": ["market", "limit", "stop"] },
+        "quantity": { "type": "number" },
+        "leverage": { "type": "number" },
+        "duration": { "type": "string" },
+        "price": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["open", "completed", "cancelled"] },
+        "stopLoss": { "type": "number" },
+        "takeProfit": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "symbol", "direction", "quantity", "price", "status"]
+    },
+    "positions": {
+      "title": "Demo Positions",
+      "description": "Simulated active and closed trading positions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "symbol": { "type": "string" },
+        "assetName": { "type": "string" },
+        "direction": { "type": "string", "enum": ["buy", "sell"] },
+        "quantity": { "type": "number" },
+        "leverage": { "type": "number" },
+        "entryPrice": { "type": "number" },
+        "currentPrice": { "type": "number" },
+        "pnl": { "type": "number" },
+        "pnlPercent": { "type": "number" },
+        "status": { "type": "string", "enum": ["open", "closed"] },
+        "openedAt": { "type": "string" },
+        "closedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "symbol", "direction", "quantity", "entryPrice", "status"]
+    },
+    "activities": {
+      "title": "User Activities",
+      "description": "Activity logs for trades, logins, and account actions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "type": { "type": "string" },
+        "description": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "userId", "type", "description", "timestamp"]
+    },
+    "auditLogs": {
+      "title": "Admin Audit Logs",
+      "description": "Immutable security logs for admin actions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "adminUserId": { "type": "string" },
+        "adminEmail": { "type": "string" },
+        "action": { "type": "string" },
+        "targetType": { "type": "string" },
+        "targetId": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "adminUserId", "action", "targetType", "timestamp"]
+    },
+    "platformSettings": {
+      "title": "Platform Settings",
+      "description": "Global demo platform settings",
+      "type": "object",
+      "properties": {
+        "maintenanceMode": { "type": "boolean" },
+        "defaultDemoBalance": { "type": "number" },
+        "platformNotice": { "type": "string" }
+      }
+    },
+    "depositRequests": {
+      "title": "Deposit Requests",
+      "description": "Simulated user deposit requests",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "userName": { "type": "string" },
+        "method": { "type": "string" },
+        "methodId": { "type": "string" },
+        "amount": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "txHashOrProof": { "type": "string" },
+        "proofUrl": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "processedAt": { "type": "string" },
+        "processedBy": { "type": "string" }
+      },
+      "required": ["id", "userId", "userEmail", "userName", "method", "amount", "status", "createdAt"]
+    },
+    "withdrawalRequests": {
+      "title": "Withdrawal Requests",
+      "description": "Simulated user withdrawal requests",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "userName": { "type": "string" },
+        "method": { "type": "string" },
+        "amount": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "notes": { "type": "string" },
+        "withdrawalCodeId": { "type": "string" },
+        "withdrawalCodeVerified": { "type": "boolean" },
+        "codeVerifiedAt": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "processedAt": { "type": "string" },
+        "processedBy": { "type": "string" }
+      },
+      "required": ["id", "userId", "userEmail", "userName", "method", "amount", "status", "createdAt"]
+    },
+    "withdrawalCodes": {
+      "title": "Admin Withdrawal Authorization Codes",
+      "description": "Single-use 6-digit numeric authorization codes required for client withdrawals",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "codeHash": { "type": "string" },
+        "slotNumber": { "type": "number", "enum": [1, 2] },
+        "status": { "type": "string", "enum": ["active", "used", "revoked"] },
+        "createdAt": { "type": "string" },
+        "createdByAdminUid": { "type": "string" },
+        "createdByAdminEmail": { "type": "string" },
+        "targetUserId": { "type": "string" },
+        "targetUserEmail": { "type": "string" },
+        "targetUserName": { "type": "string" },
+        "usedAt": { "type": "string" },
+        "usedByUserId": { "type": "string" },
+        "usedByUserEmail": { "type": "string" },
+        "usedInWithdrawalRequestId": { "type": "string" },
+        "revokedAt": { "type": "string" },
+        "revokedByAdminUid": { "type": "string" },
+        "revocationReason": { "type": "string" }
+      },
+      "required": ["id", "code", "codeHash", "slotNumber", "status", "createdAt"]
+    },
+    "loanRequests": {
+      "title": "Loan Requests",
+      "description": "Simulated user loan applications",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "userName": { "type": "string" },
+        "planName": { "type": "string" },
+        "amount": { "type": "number" },
+        "durationMonths": { "type": "number" },
+        "monthlyPayment": { "type": "number" },
+        "totalRepayment": { "type": "number" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected"] },
+        "appliedAt": { "type": "string" },
+        "notes": { "type": "string" },
+        "processedAt": { "type": "string" },
+        "processedBy": { "type": "string" }
+      },
+      "required": ["id", "userId", "userEmail", "userName", "amount", "status", "appliedAt"]
+    },
+    "paymentMethods": {
+      "title": "Payment Methods",
+      "description": "Enabled deposit options with admin address configuration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "symbol": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "address": { "type": "string" },
+        "iconType": { "type": "string" },
+        "iconColor": { "type": "string" },
+        "iconBg": { "type": "string" },
+        "enabled": { "type": "boolean" }
+      },
+      "required": ["id", "name", "symbol", "address"]
+    },
+    "supportThreads": {
+      "title": "Support Threads",
+      "description": "Traders' support inquiry threads and messages",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "status": { "type": "string", "enum": ["open", "replied", "closed"] },
+        "lastMessage": { "type": "string" },
+        "lastMessageTime": { "type": "string" },
+        "unreadByAdmin": { "type": "boolean" },
+        "unreadByUser": { "type": "boolean" },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "sender": { "type": "string", "enum": ["user", "admin"] },
+              "senderName": { "type": "string" },
+              "senderEmail": { "type": "string" },
+              "text": { "type": "string" },
+              "timestamp": { "type": "string" }
+            }
+          }
+        },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "userName", "userEmail", "status", "createdAt", "updatedAt"]
+    },
+    "notifications": {
+      "title": "App Notifications",
+      "description": "System notifications for individual users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string", "enum": ["deposit", "withdrawal", "loan", "system", "announcement"] },
+        "status": { "type": "string", "enum": ["approved", "rejected", "info"] },
+        "amount": { "type": "number" },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "senderAdminId": { "type": "string" },
+        "broadcastId": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "message", "type", "status", "read", "createdAt"]
+    },
+    "broadcasts": {
+      "title": "Admin Broadcasts",
+      "description": "Administrative broadcast notification log records",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "recipientType": { "type": "string", "enum": ["all", "verified", "unverified", "specific"] },
+        "targetUserId": { "type": "string" },
+        "recipientCount": { "type": "number" },
+        "sentAt": { "type": "string" },
+        "sentByAdminUid": { "type": "string" },
+        "sentByAdminEmail": { "type": "string" },
+        "type": { "type": "string", "enum": ["system", "deposit", "withdrawal", "loan", "announcement"] }
+      },
+      "required": ["id", "title", "message", "recipientType", "recipientCount", "sentAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "users",
+      "description": "User profiles"
+    },
+    "/markets/{marketId}": {
+      "schema": "markets",
+      "description": "Demo financial market catalog"
+    },
+    "/watchlists/{id}": {
+      "schema": "watchlists",
+      "description": "User market watchlists"
+    },
+    "/orders/{id}": {
+      "schema": "orders",
+      "description": "Simulated user orders"
+    },
+    "/positions/{id}": {
+      "schema": "positions",
+      "description": "Simulated active and closed trading positions"
+    },
+    "/activities/{id}": {
+      "schema": "activities",
+      "description": "Activity logs for trades, logins, and account actions"
+    },
+    "/auditLogs/{id}": {
+      "schema": "auditLogs",
+      "description": "Immutable security logs for admin actions"
+    },
+    "/platformSettings/{id}": {
+      "schema": "platformSettings",
+      "description": "Global platform settings"
+    },
+    "/depositRequests/{id}": {
+      "schema": "depositRequests",
+      "description": "Deposit requests"
+    },
+    "/withdrawalRequests/{id}": {
+      "schema": "withdrawalRequests",
+      "description": "Withdrawal requests"
+    },
+    "/withdrawalCodes/{id}": {
+      "schema": "withdrawalCodes",
+      "description": "Admin withdrawal authorization codes"
+    },
+    "/loanRequests/{id}": {
+      "schema": "loanRequests",
+      "description": "Loan requests"
+    },
+    "/paymentMethods/{id}": {
+      "schema": "paymentMethods",
+      "description": "Payment methods configuration"
+    },
+    "/supportThreads/{userId}": {
+      "schema": "supportThreads",
+      "description": "Live support chat threads"
+    },
+    "/notifications/{id}": {
+      "schema": "notifications",
+      "description": "In-app system and transaction notifications"
+    },
+    "/broadcasts/{id}": {
+      "schema": "broadcasts",
+      "description": "Admin broadcast logs"
+    }
+  }
+}
